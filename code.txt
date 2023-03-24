@@ -1,0 +1,315 @@
+
+source code ( Registration needed in GEE): https://code.earthengine.google.com/d73a1983fb7c9f3ffaaf457f1c3de35f
+
+
+
+
+
+
+//mati-kineta
+var S2_1 = ee.ImageCollection('COPERNICUS/S2_SR')
+                  .filterBounds(geometry1);
+
+var S2_1 = S2_1.filterMetadata('CLOUD_COVERAGE_ASSESSMENT', 'less_than', 10);
+
+            
+var S2_1 = S2_1.filterDate('2018-07-24','2018-09-06');
+
+print(S2_1.size());
+
+            
+var S2_image = S2_1.first();
+
+var S2_clipped_collection1 = S2_1.map(function (S2_image){
+  return S2_image.clip(geometry1);
+});
+
+
+var S2_image = S2_image.select('B2');
+
+var S2_clipped_collection1 = S2_clipped_collection1
+  .reduce(ee.Reducer.mean())
+  .reproject(S2_image.projection());
+
+
+
+var S2_clipped_collection1 = S2_clipped_collection1.select( 'B2_mean', 'B3_mean', 'B4_mean', 'B5_mean', 'B6_mean', 'B7_mean', 'B8_mean', 'B11_mean','B12_mean');
+
+Map.addLayer(S2_clipped_collection1, {bands:['B12_mean', 'B8_mean', 'B2_mean'], min:100, max:1600}, "S2_clipped_collection1");
+
+
+
+//grammatiko
+var S2_2 = ee.ImageCollection('COPERNICUS/S2_SR')
+                  .filterBounds(geometry2);
+
+var S2_2 = S2_2.filterMetadata('CLOUD_COVERAGE_ASSESSMENT', 'less_than', 1);
+
+            
+var S2_2 = S2_2.filterDate('2017-08-15','2017-09-04');
+
+print(S2_2.size());
+
+var S2_image = S2_2.first();
+
+
+var S2_image = S2_2.first();
+
+var S2_clipped_collection2 = S2_2.map(function (S2_image){
+  return S2_image.clip(geometry2);
+});
+
+
+var S2_image = S2_image.select('B2');
+
+var S2_clipped_collection2 = S2_clipped_collection2
+  .reduce(ee.Reducer.mean())
+  .reproject(S2_image.projection());
+
+
+var S2_clipped_collection2 = S2_clipped_collection2.select( 'B2_mean', 'B3_mean', 'B4_mean', 'B5_mean', 'B6_mean', 'B7_mean', 'B8_mean', 'B11_mean','B12_mean');
+
+Map.addLayer(S2_clipped_collection2, {bands:['B12_mean', 'B8_mean', 'B2_mean'], min:100, max:1600}, "S2_clipped_collection2");
+
+
+
+
+
+
+
+
+
+
+
+
+//kotodespoti
+var S2_3 = ee.ImageCollection('COPERNICUS/S2_SR')
+                  .filterBounds(geometry3);
+
+var S2_3 = S2_3.filterMetadata('CLOUD_COVERAGE_ASSESSMENT', 'less_than', 1);
+
+            
+var S2_3 = S2_3.filterDate('2019-08-25','2019-09-18');
+
+print(S2_3.size());
+            
+var S2_image = S2_3.first();
+
+var S2_clipped_collection3 = S2_3.map(function (S2_image){
+  return S2_image.clip(geometry3);
+});
+
+
+var S2_image = S2_image.select('B2');
+
+var S2_clipped_collection3 = S2_clipped_collection3
+  .reduce(ee.Reducer.mean())
+  .reproject(S2_image.projection());
+
+var S2_clipped_collection3 = S2_clipped_collection3.select( 'B2_mean', 'B3_mean', 'B4_mean', 'B5_mean', 'B6_mean', 'B7_mean', 'B8_mean', 'B11_mean','B12_mean');
+
+Map.addLayer(S2_clipped_collection3, {bands:['B12_mean', 'B8_mean', 'B2_mean'], min:100, max:1600}, "S2_clipped_collection3");
+
+
+
+
+
+
+
+
+
+
+
+//kinthira
+var S2_4 = ee.ImageCollection('COPERNICUS/S2_SR')
+                  .filterBounds(geometry4);
+
+var S2_4 = S2_4.filterMetadata('CLOUD_COVERAGE_ASSESSMENT', 'less_than', 1);
+
+            
+var S2_4 = S2_4.filterDate('2017-08-05','2017-09-02');
+
+print(S2_4.size());
+
+
+var S2_image = S2_4.first();
+
+
+var S2_clipped_collection4 = S2_4.map(function (S2_image){
+  return S2_image.clip(geometry4);
+});
+
+
+var S2_image = S2_image.select('B2');
+
+var S2_clipped_collection4 = S2_clipped_collection4
+  .reduce(ee.Reducer.mean());
+
+
+var S2_clipped_collection4 = S2_clipped_collection4.select( 'B2_mean', 'B3_mean', 'B4_mean', 'B5_mean', 'B6_mean', 'B7_mean', 'B8_mean', 'B11_mean','B12_mean');
+
+Map.addLayer(S2_clipped_collection4, {bands:['B12_mean', 'B8_mean', 'B2_mean'], min:100, max:1600}, "S2_clipped_collection4");
+
+
+
+
+//meteora
+var S2_5 = ee.ImageCollection('COPERNICUS/S2_SR')
+                  .filterBounds(geometry5);
+
+var S2_5 = S2_5.filterMetadata('CLOUD_COVERAGE_ASSESSMENT', 'less_than', 5);
+
+            
+var S2_5 = S2_5.filterDate('2020-08-05','2020-09-02');
+
+print(S2_5.size());
+
+
+var S2_image = S2_5.first();
+
+
+var S2_clipped_collection5 = S2_5.map(function (S2_image){
+  return S2_image.clip(geometry5);
+});
+
+
+var S2_image = S2_image.select('B2');
+
+var S2_clipped_collection5 = S2_clipped_collection5
+  .reduce(ee.Reducer.mean())
+  .reproject(S2_image.projection());
+
+
+
+var S2_clipped_collection5 = S2_clipped_collection5.select( 'B2_mean', 'B3_mean', 'B4_mean', 'B5_mean', 'B6_mean', 'B7_mean', 'B8_mean', 'B11_mean','B12_mean');
+
+Map.addLayer(S2_clipped_collection5, {bands:['B12_mean', 'B8_mean', 'B2_mean'], min:100, max:1600}, "meteors");
+
+
+
+
+
+//classification
+
+var bands = ['B2_mean', 'B3_mean', 'B4_mean', 'B5_mean', 'B6_mean', 'B7_mean', 'B8_mean', 'B11_mean','B12_mean'];
+
+
+
+
+
+//training data
+
+var classNames1 = burned1.merge(kalliergeies1).merge(vegetation1).merge(soil1).merge(water1).merge(buildings1);
+
+var classNames2 = valburned2.merge(valkalliergeies2).merge(valvegetation2).merge(valsoil2).merge(valwater2).merge(valbuildings2);
+
+
+var training1 = S2_clipped_collection1.select(bands).sampleRegions({
+  collection: classNames1,
+  properties: ['landcover'],
+  scale: 10
+});
+
+
+
+var training2 = S2_clipped_collection2.select(bands).sampleRegions({
+  collection: classNames2,
+  properties: ['landcover'],
+  scale: 10
+});
+
+
+
+var training = training2.merge(training1);
+
+
+
+var classifier = ee.Classifier.smileRandomForest(100).train({
+  features: training,
+  classProperty: 'landcover',
+  inputProperties: bands
+});
+
+
+
+
+//Run the classification
+var classified = S2_clipped_collection3.select(bands).classify(classifier);
+
+
+//Display classification
+Map.addLayer(classified,
+{min: 0, max: 5, palette: ['black', 'blue', 'green','yellow','white','orange']},
+'classification');
+
+
+
+
+//validation
+
+
+var valNames4 = burned4.merge(kalliergeies4).merge(vegetation4).merge(soil4).merge(water4).merge(buildings4);
+
+var valNames1 = valburned1.merge(valkalliergeies1).merge(valvegetation1).merge(valsoil1).merge(valwater1).merge(valbuildings1);
+
+
+
+//validation
+
+var validation1 = S2_clipped_collection4.select(bands).sampleRegions({
+  collection: valNames4,
+  properties: ['landcover'],
+  scale: 10,
+});
+
+
+
+var validation2 = S2_clipped_collection1.select(bands).sampleRegions({
+  collection: valNames1,
+  properties: ['landcover'],
+  scale: 10,
+});
+
+
+var validation = validation1.merge(validation2);
+
+
+var validated = validation.classify(classifier);
+
+
+
+// Get a confusion matrix representing resubstitution accuracy.
+var trainAccuracy = classifier.confusionMatrix();
+print('Resubstitution error matrix: ', trainAccuracy);
+print('Training overall accuracy: ', trainAccuracy.accuracy());
+
+// Get a confusion matrix representing expected accuracy.
+var testAccuracy = validated.errorMatrix('landcover', 'classification');
+print('Validation error matrix: ', testAccuracy);
+print('Validation overall accuracy: ', testAccuracy.accuracy());
+
+
+
+
+
+var a = 0;
+  var x = classified.eq(a).multiply(ee.Image.pixelArea());
+  
+  var calculation = x.reduceRegion({
+    
+    reducer:ee.Reducer.sum(),
+    geometry: geometry3,
+    crs: 'EPSG: 32634',
+    scale: 10,
+    maxPixels: 1e13,
+    
+  });
+
+
+
+  print(calculation);
+print ('ID' + ' ' +a+ ' ' + 'km^2', calculation, ee.Number(calculation.values().get(0)).divide(1e6));
+
+
+
+
